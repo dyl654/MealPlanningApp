@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+ <html lang="en">
+        <head>
+            <title>Meal Planning App</title>
+        </head>
+        <body>
+            <h1>Welcome to the Meal Planning Application</h1>
+            <p>This is the front-end of the meal planning app.</p>
+            <form id="recipeForm">
+                <label for="url">Url:</label><br>
+                <input type="text" id="url" name="url"><br><br>
+                <label for="sunday">Sunday:</label>
+                <input type="checkbox" id="sunday" name="sunday"><br>
+                <label for="monday">Monday:</label>
+                <input type="checkbox" id="monday" name="monday"><br>
+                <label for="tuesday">Tuesday:</label>
+                <input type="checkbox" id="tuesday" name="tuesday"><br>
+                <label for="wednesday">Wednesday:</label>
+                <input type="checkbox" id="wednesday" name="wednesday"><br>
+                <label for="thursday">Thursday:</label>
+                <input type="checkbox" id="thursday" name="thursday"><br>
+                <label for="friday">Friday:</label>
+                <input type="checkbox" id="friday" name="friday"><br>
+                <label for="saturday">Saturday:</label>
+                <input type="checkbox" id="saturday" name="saturday"><br><br>
+                <input type="button" value="Submit" onclick="submitForm()">
+            </form>
+            <p id="response"></p>
+            <script>
+                async function submitForm() {
+                    const url = document.getElementById('url').value;
+                    const sunday = document.getElementById('sunday').checked;
+                    const monday = document.getElementById('monday').checked;
+                    const tuesday = document.getElementById('tuesday').checked;
+                    const wednesday = document.getElementById('wednesday').checked;
+                    const thursday = document.getElementById('thursday').checked;
+                    const friday = document.getElementById('friday').checked;
+                    const saturday = document.getElementById('saturday').checked;
+                    const response = await fetch('/api/recipes', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ url, sunday, monday, tuesday, wednesday, thursday, friday, saturday })
+                    });
+                    const result = await response.json();
+                    document.getElementById('response').innerText = JSON.stringify(result);
+                }
+            </script>
+        </body>
+    </html>

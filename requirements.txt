@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+recipe-scrapers
+pdfkit
+argparse
+gspread
+oauth2client
+cups
+pydantic
+wkhtmltopdf
